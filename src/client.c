@@ -6,7 +6,7 @@
 /*   By: epeters- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:43:11 by epeters-          #+#    #+#             */
-/*   Updated: 2022/12/09 11:31:33 by epeters-         ###   ########.fr       */
+/*   Updated: 2022/12/09 13:05:09 by epeters-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	send_bit(int pid, char c)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(50);
+		usleep(100);
 	}
 }
 
