@@ -5,13 +5,13 @@
 #                                                     +:+ +:+         +:+      #
 #    By: epeters- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/07/09 17:56:05 by epeters-          #+#    #+#              #
-#    Updated: 2022/11/27 18:54:55 by epeters-         ###   ########.fr        #
+#    Created: 2022/12/08 17:38:21 by epeters-          #+#    #+#              #
+#    Updated: 2022/12/09 10:59:38 by epeters-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= client
-NAMESRV	= server
+NAME = client
+NAME_SRV = server
 
 CC		= gcc
 CFLAGS	= -Wall -Werror -Wextra -I./include
@@ -19,15 +19,15 @@ CFLAGS	= -Wall -Werror -Wextra -I./include
 DIR_SRCS	= src
 DIR_LIBFT	= libft
 
-SRCS	= client.c
-SRCSSRV	= server.c
+SRCS =	client.c
+SRCS_SRV = server.c
 
-OBJS	= $(addprefix $(DIR_SRCS)/,$(SRCS:.c=.o))
-OBJSSRV	= $(addprefix $(DIR_SRCS)/,$(SRCSSRV:.c=.o))
+OBJS = $(addprefix $(DIR_SRCS)/,$(SRCS:.c=.o))
+OBJS_SRV = $(addprefix $(DIR_SRCS)/,$(SRCS_SRV:.c=.o))
 
 LIBFT = libft/libft.a
 
-all: $(NAME) $(NAMESRV)
+all: $(NAME) $(NAME_SRV)
 
 $(NAME): $(OBJS)
 	@echo Compiling $(NAME)...
@@ -36,20 +36,20 @@ $(NAME): $(OBJS)
 	$(CC) $(CLFAGS) -o $(NAME) $(OBJS) $(LIBFT)
 	@echo $(NAME) ready!
 
-$(NAMESRV): $(OBJSSRV)
-	@echo Compiling $(NAMESRV)...
+$(NAME_SRV): $(OBJS_SRV)
+	@echo Compiling $(NAME_SRV)...
 	@echo Compiling libft...
 	make -C $(DIR_LIBFT)
-	$(CC) $(CLFAGS) -o $(NAMESRV) $(OBJSSRV) $(LIBFT)
-	@echo $(NAMESRV) ready!
+	$(CC) $(CLFAGS) -o $(NAME_SRV) $(OBJS_SRV) $(LIBFT)
+	@echo $(NAME_SRV) ready!
 
 clean:
 	make clean -C $(DIR_LIBFT)
-	rm -f $(OBJS) $(OBJSSRV)
+	rm -f $(OBJS) $(OBJS_SRV)
 
 fclean: clean
 	make fclean -C $(DIR_LIBFT)
-	rm -f $(NAME) $(NAMESRV)
+	rm -f $(NAME) $(NAME_SRV)
 
 re: fclean all
 

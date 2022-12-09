@@ -1,8 +1,18 @@
-#include <signal.h>
-#include <sys/types.h>
-#include "../include/libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: epeters- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/08 17:44:36 by epeters-          #+#    #+#             */
+/*   Updated: 2022/12/09 11:14:26 by epeters-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	handle_sig(int	sig)
+#include "../include/minitalk.h"
+
+void	handle_sig(int sig)
 {
 	static int				bits;
 	static unsigned char	c;
@@ -16,7 +26,8 @@ void	handle_sig(int	sig)
 		bits = 0;
 		c = 0;
 	}
-	c <<= 1;
+	else
+		c <<= 1;
 }
 
 int	main(void)
@@ -27,11 +38,9 @@ int	main(void)
 	ft_putstr("Server PID: ");
 	ft_putnbr(server_pid);
 	ft_putchar('\n');
+	signal(SIGUSR1, handle_sig);
+	signal(SIGUSR2, handle_sig);
 	while (1)
-	{
-		signal(SIGUSR1, handle_sig);
-		signal(SIGUSR2, handle_sig);
 		pause();
-	}
 	return (1);
 }
