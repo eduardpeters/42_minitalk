@@ -6,35 +6,27 @@
 /*   By: epeters- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:44:36 by epeters-          #+#    #+#             */
-/*   Updated: 2022/12/09 13:37:19 by epeters-         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:33:49 by epeters-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
-/*
-static void	print_bits(unsigned char c)
-{
-	int	bits;
+#include "../include/server.h"
 
-	bits = 8;
-	while (bits-- > 0)
-	{
-		if (c & (1 << bits))
-			ft_putchar('1');
-		else
-			ft_putchar('0');
-	}
-	ft_putchar('\n');
-}
-*/
-
-static void	handle_sig_int(int sig)
+static void	memory_exit(void)
 {
-	if (sig == SIGINT)
-		ft_putstr("SIGINT received, exiting program\n");
-	else
-		ft_putstr("Unable to allocate memory, exiting program\n");
+	ft_putstr("Memory allocation failed\n");
 	exit(1);
+}
+
+static void	print_string(void)
+{
+	if (g_server_string)
+	{
+		ft_putstr(g_server_string);
+		free(g_server_string);
+		g_server_string = NULL;
+	}
+	return ;
 }
 
 static void	handle_incoming_char(char c)
@@ -45,22 +37,22 @@ static void	handle_incoming_char(char c)
 	str[0] = c;
 	str[1] = '\0';
 	if (c == '\0')
-	{
-		ft_putstr(g_server_string);
-		free(g_server_string);
-		g_server_string = NULL;
-	}
-	else if (!g_server_string)
-		g_server_string = ft_strdup(str);
+		print_string();
 	else
 	{
-		temp = g_server_string;
-		g_server_string = ft_strjoin(g_server_string, str);
-		if (temp)
-			free(temp);
 		if (!g_server_string)
-			handle_sig_int(0);
+			g_server_string = ft_strdup(str);
+		else
+		{
+			temp = g_server_string;
+			g_server_string = ft_strjoin(g_server_string, str);
+			if (temp)
+				free(temp);
+		}
+		if (!g_server_string)
+			memory_exit();
 	}
+	return ;
 }
 
 static void	handle_sig(int sig)
@@ -91,7 +83,6 @@ int	main(void)
 	ft_putchar('\n');
 	signal(SIGUSR1, handle_sig);
 	signal(SIGUSR2, handle_sig);
-	signal(SIGINT, handle_sig_int);
 	while (1)
 		pause();
 	return (0);

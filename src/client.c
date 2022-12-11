@@ -6,11 +6,11 @@
 /*   By: epeters- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:43:11 by epeters-          #+#    #+#             */
-/*   Updated: 2022/12/09 13:05:09 by epeters-         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:33:33 by epeters-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
+#include "../include/client.h"
 
 static void	send_bit(int pid, char c)
 {
