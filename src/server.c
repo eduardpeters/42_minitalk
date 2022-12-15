@@ -6,7 +6,7 @@
 /*   By: epeters- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 17:44:36 by epeters-          #+#    #+#             */
-/*   Updated: 2022/12/11 18:33:49 by epeters-         ###   ########.fr       */
+/*   Updated: 2022/12/15 19:10:40 by epeters-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ int	main(void)
 	ft_putstr("Server PID: ");
 	ft_putnbr(server_pid);
 	ft_putchar('\n');
-	signal(SIGUSR1, handle_sig);
-	signal(SIGUSR2, handle_sig);
+	signal(SIGUSR1, &handle_sig);
+	signal(SIGUSR2, &handle_sig);
 	while (1)
 		pause();
 	return (0);
