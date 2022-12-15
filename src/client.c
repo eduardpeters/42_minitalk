@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: epeters- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 17:43:11 by epeters-          #+#    #+#             */
-/*   Updated: 2022/12/11 18:33:33 by epeters-         ###   ########.fr       */
+/*   Created: 2022/12/15 17:57:41 by epeters-          #+#    #+#             */
+/*   Updated: 2022/12/15 17:57:51 by epeters-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/client.h"
 
-static void	send_bit(int pid, char c)
+static void	send_byte(int pid, char c)
 {
 	int	bits;
 
@@ -34,10 +34,10 @@ static void	send_string(int pid, char *str)
 	i = 0;
 	while (str[i])
 	{
-		send_bit(pid, str[i]);
+		send_byte(pid, str[i]);
 		i++;
 	}
-	send_bit(pid, '\0');
+	send_byte(pid, '\0');
 }
 
 static int	check_pid(char *str)
