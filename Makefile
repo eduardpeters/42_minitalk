@@ -6,7 +6,7 @@
 #    By: epeters- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/08 17:38:21 by epeters-          #+#    #+#              #
-#    Updated: 2022/12/15 19:34:23 by epeters-         ###   ########.fr        #
+#    Updated: 2023/01/06 18:59:17 by epeters-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,13 +57,13 @@ bonus: $(BNS_C) $(BNS_S)
 
 $(BNS_C): $(OBJS_BNS_C)
 	make -C $(DIR_LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS_BNS_C) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME_BNS) $(OBJS_BNS_C) $(LIBFT)
 	@touch $(BNS_C)
 	@echo Client Bonus ready!
 
 $(BNS_S): $(OBJS_BNS_S)
 	make -C $(DIR_LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS_BNS_S) $(LIBFT)
+	$(CC) $(CFLAGS) -o $(NAME_BNS_S) $(OBJS_BNS_S) $(LIBFT)
 	@touch $(BNS_S)
 	@echo Server Bonus ready!
 
